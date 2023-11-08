@@ -23,7 +23,7 @@ import fetch from 'node-fetch'
 //   };
 // };
 
-const handler = async (req, res) => {
+export const handler = async (req, res) => {
   try {
     const apiKey = process.env.DRONE_DEPLOY_API_KEY;
     const url = 'https://www.dronedeploy.com/graphql';
