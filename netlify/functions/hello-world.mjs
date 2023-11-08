@@ -7,7 +7,7 @@
 //     }
 //   }
 
-import fetch from 'node-fetch'
+ import fetch from 'node-fetch'
 
 
 // export const handler = async () => {
@@ -23,7 +23,9 @@ import fetch from 'node-fetch'
 //   };
 // };
 
-export const handler = async (req, res) => {
+//const fetch = require('node-fetch');
+
+exports.handler = async (event) => {
   try {
     const apiKey = process.env.DRONE_DEPLOY_API_KEY;
     const url = 'https://www.dronedeploy.com/graphql';
@@ -51,11 +53,24 @@ export const handler = async (req, res) => {
     });
 
     const data = await response.json();
-    console.log('API Response:', data);
-    res.set('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
-    res.status(200).send('API call successful');
+
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Allow requests from any origin
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).send('Internal Server Error');
+    return {
+      statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Allow requests from any origin
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ error: 'Internal Server Error' })
+    };
   }
-};  
+};
