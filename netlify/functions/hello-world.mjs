@@ -31,13 +31,39 @@ exports.handler = async (event) => {
     const url = 'https://www.dronedeploy.com/graphql';
     const query = JSON.stringify({
       query: `
-        {
-          viewer {
-            organization {
-              name
+      {
+        viewer {
+          equipments {
+            edges {
+              node {
+                name
+                serialNumber
+                firmwareVersion
+                lastDateFlown
+                dateCreation
+                status
+              }
+            }
+          }
+          flightRecords(last: 10) {
+            edges {
+              node {
+                id
+              }
+            }
+          }
+          organization {
+            name
+            projects(first: 10) {
+              edges {
+                node {
+                  id
+                }
+              }
             }
           }
         }
+      }
       `
     });
 
