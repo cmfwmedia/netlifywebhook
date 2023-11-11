@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 require('dotenv').config()
 
 const apiKey = process.env.DRONELOGBOOK_API_KEY;
