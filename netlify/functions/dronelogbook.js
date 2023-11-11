@@ -1,5 +1,7 @@
 import axios from 'axios';
-require('dotenv').config()
+require('dotenv').config();
+
+exports.handler = async (event) => {
 
 const apiKey = process.env.DRONELOGBOOK_API_KEY;
 
@@ -22,3 +24,4 @@ axios
   .catch(error => {
     console.error('API Error:', error.response ? error.response.data : error.message);
   });
+}
